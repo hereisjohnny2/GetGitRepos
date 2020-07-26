@@ -6,6 +6,7 @@ class App {
         this.formElement = document.getElementById("repo-form");
         this.inputElement = document.querySelector("input[name=repository]");
         this.listElement = document.getElementById("repo-list");
+        this.loadElement = document.querySelector("#loading-status h3");
         this.registerHandlers();
     }
 
@@ -17,13 +18,10 @@ class App {
 
     setLoading(loading = true) {
         if (loading === true) {
-            let loadingElement = document.createElement('span');
-            loadingElement.appendChild(document.createTextNode('Carregando...'));
-            loadingElement.setAttribute('id', 'loading');
-
-            this.formElement.appendChild(loadingElement);
+            this.loadElement.innerHTML = "";
+            this.loadElement.appendChild(document.createTextNode('Carregando...'));
         } else {
-            document.getElementById('loading').remove();
+            this.loadElement.innerHTML = "";
         }
     }
 
@@ -53,12 +51,12 @@ class App {
 
             this.inputElement.value = '';
             this.render();
+            this.setLoading(false);
         } catch (error) {
-            alert('O repositório não existe!');
-            console.log(error);
+            this.loadElement.innerHTML = "";
+            this.loadElement.appendChild(document.createTextNode('Usuário não encontrado :('));
         }
 
-        this.setLoading(false);
 
     }
 
