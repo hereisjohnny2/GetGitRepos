@@ -52,12 +52,12 @@ class App {
             this.inputElement.value = '';
             this.render();
             this.setLoading(false);
+            
         } catch (error) {
+            this.inputElement.value = '';
             this.loadElement.innerHTML = "";
             this.loadElement.appendChild(document.createTextNode('Usuário não encontrado :('));
         }
-
-
     }
 
     render() {
